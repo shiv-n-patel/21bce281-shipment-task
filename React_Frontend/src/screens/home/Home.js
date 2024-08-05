@@ -6,6 +6,10 @@ import { MdOutlineCreateNewFolder } from "react-icons/md";
 import { FaFileMedical } from "react-icons/fa";
 import { IoArrowBackOutline } from "react-icons/io5";
 
+
+// user components
+import Content from '../../components/content/Content';
+
 // mui components
 import { Box } from '@mui/material';
 import Button from '@mui/material/Button';
@@ -21,8 +25,85 @@ import './Home.css'
 
 const Home = () => {
     const [directory, setDirectory] = useState("root/");
-    const [open, setOpen] = React.useState(false);
-    const [file, setFile] = React.useState(true);
+    const [open, setOpen] = useState(false);
+    const [file, setFile] = useState(true);
+    const [currentLevel, setcurrentLevel] = useState(1);
+    const [content, setContent] = useState({
+        
+        id:"1",
+        name: "root",
+        isFolder: true,
+        level : "1",
+        items: [
+          {
+            id:"2",
+            name: "public",
+            isFolder: true,
+            level : "2",
+            items: [
+              {
+                id:"3",
+                name: "public nested 1",
+                isFolder: true,
+                items: [
+                  {
+                    id:"4",
+                    name: "index.html",
+                    isFolder: false,
+                    items: []
+                  },
+                  {
+                    id:"5",
+                    name: "hello.html",
+                    isFolder: false,
+                    items: []
+                  }
+                ]
+              },
+              {
+                id:"6",
+                name: "public_nested_file",
+                isFolder: false,
+                items: []
+              }
+            ]
+          },
+          {
+            id:"7",
+            name: "src",
+            isFolder: true,
+            level : "2",
+            items: [
+              {
+                id:"8",
+                name: "App.js",
+                isFolder: false,
+                items: []
+              },
+              {
+                id:"9",
+                name: "Index.js",
+                isFolder: false,
+                items: []
+              },
+              {
+                id:"10",
+                name: "styles.css",
+                isFolder: false,
+                items: []
+              }
+            ]
+          },
+          {
+            id:"11",
+            name: "package.json",
+            isFolder: false,
+            level : "2",
+            items: []
+          }
+        ]
+      });
+    const [currentDirectory, setCurrentDirectory] = useState("root");
 
     const handleClickOpen = (file) => {
         setOpen(true);
@@ -32,6 +113,9 @@ const Home = () => {
     const handleClose = () => {
         setOpen(false);
     };
+
+    const InsertInContent = () => {
+    }
     return(  
         <div className='container'>
             <div className="header">
@@ -59,10 +143,9 @@ const Home = () => {
                         const formJson = Object.fromEntries((formData).entries());
                         const directory_name = formJson.directory_name;
                         const file_name = formJson.file_name;
-                        console.log("Directory : ",directory_name);
-                        console.log("File : ",file_name);
+                       
+                        InsertInContent(directory_name, file_name);
 
-                        alert(directory_name);
                         handleClose();
                     },
                     }}
@@ -110,6 +193,8 @@ const Home = () => {
                     </Box>
 
             </Dialog>
+
+            <Content currentDirectory = {currentDirectory} setCurrentDirectory={setCurrentDirectory} content={content} currentLevel={currentLevel}/>
         </div>
     )
 }
