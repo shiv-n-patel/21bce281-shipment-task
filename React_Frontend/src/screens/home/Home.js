@@ -29,77 +29,24 @@ const Home = () => {
     const [file, setFile] = useState(true);
     const [currentLevel, setcurrentLevel] = useState(1);
     const [content, setContent] = useState({
-        
-        id:"1",
-        name: "root",
-        isFolder: true,
-        level : "1",
-        items: [
+        name: 'root',
+        files: ['file1.txt', 'file2.txt'],
+        subdirectories: [
           {
-            id:"2",
-            name: "public",
-            isFolder: true,
-            level : "2",
-            items: [
+            name: 'dir1',
+            files: ['file3.txt', 'file4.txt'],
+            subdirectories: [
               {
-                id:"3",
-                name: "public nested 1",
-                isFolder: true,
-                items: [
-                  {
-                    id:"4",
-                    name: "index.html",
-                    isFolder: false,
-                    items: []
-                  },
-                  {
-                    id:"5",
-                    name: "hello.html",
-                    isFolder: false,
-                    items: []
-                  }
-                ]
-              },
-              {
-                id:"6",
-                name: "public_nested_file",
-                isFolder: false,
-                items: []
+                name: 'dir1-1',
+                files: ['file5.txt', 'file6.txt'],
+                subdirectories: []
               }
             ]
           },
           {
-            id:"7",
-            name: "src",
-            isFolder: true,
-            level : "2",
-            items: [
-              {
-                id:"8",
-                name: "App.js",
-                isFolder: false,
-                items: []
-              },
-              {
-                id:"9",
-                name: "Index.js",
-                isFolder: false,
-                items: []
-              },
-              {
-                id:"10",
-                name: "styles.css",
-                isFolder: false,
-                items: []
-              }
-            ]
-          },
-          {
-            id:"11",
-            name: "package.json",
-            isFolder: false,
-            level : "2",
-            items: []
+            name: 'dir2',
+            files: ['file7.txt', 'file8.txt'],
+            subdirectories: []
           }
         ]
       });

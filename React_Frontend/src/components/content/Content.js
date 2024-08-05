@@ -2,43 +2,42 @@ import React, { useEffect, useState } from "react";
 import './Content.css';
 
 const Content = ({ currentDirectory, setCurrentDirectory, content, currentLevel }) => {
+    
     const [filesAtLevel, setFilesAtLevel] = useState([]);
 
-    useEffect(() => {
-        const traverseFileSystem = (content, currentLevel) => {
-            let files = [];
-
-            if (currentLevel === currentLevel) {
-                content.items.forEach(item => {
-                    if (!item.isFolder) {
-                        files.push(item);
-                    }
-                });
+    useEffect(() =>
+    {
+    
+        function getFilesAtLevel(directoryObject, level) {
+            
+            if (level === 1) {
+                return directoryObject.files;
             }
-
-            if (currentLevel < currentLevel) {
-                content.items.forEach(item => {
-                    if (item.isFolder) {
-                        files = files.concat(traverseFileSystem(item, currentLevel + 1));
-                    }
-                });
-            }
-
+            
+            
+            const files = [];
+            directoryObject.subdirectories.forEach(subdirectory => {
+                if (level > 1) {
+                files.push(...getFilesAtLevel(subdirectory, level - 1));
+                }
+            });
             return files;
-        }
+            }
+        
 
-        if (content) {
-            setFilesAtLevel(traverseFileSystem(content, 2));
-        }
-    }, [content, currentLevel]);
+        setFilesAtLevel(getFilesAtLevel(content,1));
+        console.log(getFilesAtLevel(content,2));
+        
+    }
+    , [content, currentLevel]);
 
     return (
         <div className="content-container">
 
-            {filesAtLevel.map(file => (
-                <div key={file.id}>{file.name}</div>
+            {filesAtLevel.map((file,index) => (
+                <div key={index}>{file}</div>
             ))}
-            
+
         </div>
     );
 }
