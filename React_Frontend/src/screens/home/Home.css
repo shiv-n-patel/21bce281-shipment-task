@@ -1,0 +1,23 @@
+.container
+{
+    color: white;
+}
+
+.header
+{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border:1px solid white;
+    padding: 0.5em;
+
+    border-radius: 1em;
+    
+}
+
+.flex-row
+{
+    display: flex;
+    gap: 1em
+
+}
